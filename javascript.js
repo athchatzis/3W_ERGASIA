@@ -1,4 +1,41 @@
 
+let is_online='no';
+function login() {
+  var username = document.getElementById("username").value;
+  var password = document.getElementById("password").value;
+  var validUsername = "admin";
+  var validPassword = "admin";
+  document.getElementById("log_in").style.display = "block";
+  document.getElementById("log_in").style.display = "none";
+  document.getElementById("admin-form").style.display = "block";
+  if (username === validUsername && password === validPassword) {
+    alert("Login successful!");
+    is_online ='yes';
+  } else {
+    alert("Invalid username or password. Please try again.");
+    location.reload()
+  }
+}
+
+  function logout() {
+    document.getElementById("log_out").style.display = "block";
+    document.getElementById("log_out").style.display = "none";
+    if(is_online ==='yes'){
+    is_online=0;
+    alert("Logout successfully!"); 
+    document.getElementById("log_out").style.display = "block";
+    document.getElementById("log_out").style.display = "none";
+    location.reload()  
+    }
+    else {
+      alert("you have to login first");
+      document.getElementById("log_out").style.display = "block";
+      document.getElementById("log_out").style.display = "none";
+      location.reload()
+    }
+  }
+
+
 function showSection(sectionId) {
   
   let sections = document.querySelectorAll("aside > ul > div");
@@ -82,46 +119,7 @@ function showSection4(sectionId1) {
   }
 }
 
-    let is_online=0;
-    function login() {
-      var username = document.getElementById("username").value;
-      var password = document.getElementById("password").value;
-      var validUsername = "admin";
-      var validPassword = "admin";
-      document.getElementById("log_in").style.display = "block";
-      document.getElementById("log_in").style.display = "none";
-      document.getElementById("admin-form").style.display = "block";
-      if (username === validUsername && password === validPassword) {
-          alert("Login successful!");
-          document.getElementById("aposindesh").style.display = "block";  
-          is_online = 1;
-      } else {
-          alert("Invalid username or password. Please try again.");
-      }
-
-  }
-
-  function logout() {
-
-    //document.getElementById("syndesh").style.display = "block";
-    document.getElementById("aposindesh").style.display = "block";
-    document.getElementById("aposindesh").style.display = "none";
-    //document.getElementById("admin-form").style.display = "none";
-    if(is_online == 1){
-    alert("Logout successfully!"); 
-    document.getElementById("aposindesh").style.display = "block";
-    document.getElementById("aposindesh").style.display = "none";
-    is_online=0;
-    }
-    else {
-      alert("you have to login first");
-      document.getElementById("aposindesh").style.display = "block";
-      document.getElementById("aposindesh").style.display = "none";
-    }
-
-  }
-    
-
+  
 const links = [
   { id: 1, title: "Η Βιογραφία Μέσω Wikipedia", url: "https://en.wikipedia.org/wiki/Jon_Bon_Jovi" },
   { id: 2, title: "Album για αγορά", url: "https://shop.bonjovi.com/collections/music" },
@@ -136,40 +134,38 @@ function addLink() {
       links.push(newLink);
       displayLinks();
     }
-    function editLink() {
-      const linkIdToEdit = prompt("Εισαγωγή αριθμού ID συνδέσμου προς επεξεργασία:");
-      const linkToEdit = links.find(link => link.id === parseInt(linkIdToEdit));
-  
-      if (linkToEdit) {
-        linkToEdit.title = prompt("Επεξεργασία τίτλου συνδέσμου:", linkToEdit.title);
-        linkToEdit.url = prompt("Επεξεργασία URL συνδέσμου:", linkToEdit.url);
-      } else {
-        alert("Δεν βρέθηκε σύνδεσμος με τον καθορισμένο αριθμό ID.");
-      }
-        displayLinks();
+function editLink() {
+  const linkIdToEdit = prompt("Εισαγωγή αριθμού ID συνδέσμου προς επεξεργασία:");
+  const linkToEdit = links.find(link => link.id === parseInt(linkIdToEdit));
+  if (linkToEdit) {
+    linkToEdit.title = prompt("Επεξεργασία τίτλου συνδέσμου:", linkToEdit.title);
+    linkToEdit.url = prompt("Επεξεργασία URL συνδέσμου:", linkToEdit.url);
+    } else {
+      alert("Δεν βρέθηκε σύνδεσμος με τον καθορισμένο αριθμό ID.");
     }
-    function deleteLink() {
-      const linkIdToDelete = prompt("Εισαγωγή αριθμού ID συνδέσμου προς διαγραφή:");
-      const linkIndexToDelete = links.findIndex(link => link.id === parseInt(linkIdToDelete));
-  
-      if (linkIndexToDelete !== -1) {
-        // Διαγραφή του συνδέσμου από τον πίνακα
-        links.splice(linkIndexToDelete, 1);
-      } else {
-        alert("Δεν βρέθηκε σύνδεσμος με τον καθορισμένο αριθμό ID.");
-      }
-  
       displayLinks();
-    }
-  
-    function displayLinks() {
-      // Καθαρισμός του HTML περιεχομένου της περιοχής footer
-      document.querySelector('footer').innerHTML = '';
-      // Δημιουργία νέων ετικετών p για κάθε σύνδεσμο και προσθήκη στην περιοχή footer
-      links.forEach(link => {
-        const newLinkElement = document.createElement('p');
-        newLinkElement.innerHTML = `<a href="${link.url}" target="_blank">${link.title}</a>`;
-        document.querySelector('footer').appendChild(newLinkElement);
-      });
-    }
+}
+    
+function deleteLink() {    
+  const linkIdToDelete = prompt("Εισαγωγή αριθμού ID συνδέσμου προς διαγραφή:");
+  const linkIndexToDelete = links.findIndex(link => link.id === parseInt(linkIdToDelete));
+  if (linkIndexToDelete !== -1) {
+    // Διαγραφή του συνδέσμου από τον πίνακα
+    links.splice(linkIndexToDelete, 1);
+  } else {
+    alert("Δεν βρέθηκε σύνδεσμος με τον καθορισμένο αριθμό ID.");
+  }  
+  displayLinks();
+}
+
+function displayLinks() {
+  // Καθαρισμός του HTML περιεχομένου της περιοχής footer
+  document.querySelector('footer').innerHTML = '';
+  // Δημιουργία νέων ετικετών p για κάθε σύνδεσμο και προσθήκη στην περιοχή footer
+  links.forEach(link => {
+  const newLinkElement = document.createElement('p');
+  newLinkElement.innerHTML = `<a href="${link.url}" target="_blank">${link.title}</a>`;
+  document.querySelector('footer').appendChild(newLinkElement);
+  });
+}
     

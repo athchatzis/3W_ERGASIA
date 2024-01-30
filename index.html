@@ -279,10 +279,10 @@
  
  <div id="log_in" class="hidden">
   <form>
-    <label for="username">Username:</label>
+    <label for="username" style="color: red;">Username:</label>
     <input type="text" id="username" name="username">
     <br>
-    <label for="password">Password:</label>
+    <label for="password" style="color: red;">Password:</label>
     <input type="password" id="password" name="password">
     <br>
     <button type="button" onclick="login()">Login</button>
@@ -292,7 +292,7 @@
   <button type="button" onclick="logout()">Logout</button>
 </div>
 <div id="admin-form" style="display:none">
-  <h2>Admin Dashboard </h2>
+  <h2 style="color: red;">Admin Dashboard </h2>
   <div id="management1"class="hidden">
     <h3>Projects</h3>
     <button type="button" onclick="addProject()">Add Project</button>
